@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    // outline: 1px solid yellow;
+}
+
+//Variable
+$colors:(
+    color01: #000000,
+    color02: #FFFFFF,
+    color03: #010449,
+    color04: #1CC5D3,
+    color05: #171A5F,
+    color06: #7a7a7a,
+    color07: #12ebff,
+    color08: #4A4A7F
+);
+
+// Function
+@function getColor($key){
+    @return map-get($colors, $key);
+}
+
+// Mixin
+@mixin mobile{
+    @media (max-width: 620.1px){
+        @content;
+    }
+}
+@mixin min-tablet{
+    @media (max-width: 720.1px){
+        @content;
+    }
+}
+@mixin tablet{
+    @media (max-width: 950.1px){
+        @content;
+    }
+}
+
+//App Component
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    @include min-tablet {
+        padding: 20px;
+    }
+    @include mobile {
+        padding: 0;
+    }
+    .main-wrapper {
+        background-color: getColor(color03);
+        color: getColor(color02);
+        padding: 60px 80px;
+        border-radius: 20px;
+        width: 1020px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        @include tablet {
+            padding: 40px;
+        }
+        @include mobile {
+            border-radius: 0;
+        }
+        .top {
+            display: grid;
+            justify-content: start;
+            align-items: center;
+            row-gap: 10px;
+            padding: 0 60px 40px 60px;
+            border-bottom: 1px solid getColor(color05);
+            @include tablet {
+                padding: 0 0 40px 0px;
+            }
+            h3 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 16px;
+            }
+        }
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            justify-content: center;
+            @include tablet {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                padding: 0;
+                display: grid;
+                justify-content: end;
+                align-items: center;
+                // row-gap: 36px;
+                @include tablet {
+                    grid-template-columns: repeat(5, 1fr);
+                }
+                .sidebar-item {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 999;
+                    @include tablet {
+                        grid-template-columns: 1fr;
+                        margin-top: 40px;
+                        margin-bottom: 40px;
+                    }
+                    .sidebar-text-wrapper {
+                        display: grid;
+                        row-gap: 5px;
+                        @include min-tablet {
+                            display: none;
+                        }
+                        .sidebar-text {
+                            font-size: 18px;
+                            font-weight: bold;
+                            text-align: end;
+                            @include tablet {
+                                text-align: center;
+                                font-size: 15px;
+                            }
+                        }
+                        .sidebar-text-2 {
+                            font-size: 16px;
+                            text-align: end;
+                            @include tablet {
+                                text-align: center;
+                                font-size: 13px;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+                    .sidebar-icon {
+                        width: 50px;
+                        background-color: getColor(color08);
+                        padding: 10px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        object-fit: cover;
+                        aspect-ratio: 1/1;
+                        margin: auto;
+                        cursor: pointer;
+                        &.active {
+                            background-color: getColor(color07);
+                        }
+                        @include mobile {
+                            width: 40px;
+                        }
+                    }
+                }
+            }
+            .content {
+                padding: 40px;
+                border-left: 1px solid getColor(color05);
+                @include tablet {
+                    border-left: none;
+                    border-top: 1px solid getColor(color05);
+                    padding: 40px 0;
+                }
+            }
+        }
+    }
+}
+
+//Pages Component
+.page-wrapper-1 {
+    margin-bottom: 30px;
+    .page-1 {
+        display: grid;
+        justify-content: start;
+        align-items: center;
+        row-gap: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid getColor(color05);
+        p {
+            font-size: 16px;
+        }
+        h3 {
+            font-size: 26px;
+            @include tablet {
+                font-size: 24px;
+            }
+            @include mobile {
+                font-size: 22px;
+            }
+        }
+        h4 {
+            font-size: 14px;
+        }
+    }
+}
+.page-wrapper-2 {
+    @include tablet {
+        overflow-x: hidden;
+    }
+    .page-2 {
+        display: grid;
+        justify-content: start;
+        align-items: center;
+        row-gap: 30px;
+        h4 {
+            font-size: 14px;
+        }
+        input {
+            width: 200%;
+            background-color: transparent;
+            color: getColor(color02);
+            padding: 20px;
+            border: 2px solid getColor(color04);
+            border-radius: 20px;
+            outline: none;
+            font-size: 16px;
+            &::placeholder {
+                color: getColor(color06);
+            }
+            @include min-tablet {
+                width: 150%;
+            }
+            @include mobile {
+                width: auto;
+            }
+        }
+        .page-btn {
+            width: 200%;
+            @include min-tablet {
+                width: auto;
+            }
+            @include mobile {
+                width: 100%;
+            }
+            button {
+                color: getColor(color01);
+                background-color: getColor(color04);
+                padding: 15px 40px;
+                border: none;
+                border-radius: 30px;
+                float: right;
+                cursor: pointer;
+                transition: all .4s ease;
+                font-size: 18px;
+                font-weight: bold;
+                &:hover {
+                    background-color: getColor(color07);
+                }
+                @include min-tablet {
+                    float: left;
+                }
+                @include mobile {
+                    float: initial;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
